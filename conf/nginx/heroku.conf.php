@@ -20,8 +20,6 @@ http {
 
 	fastcgi_buffers 256 4k;
 
-	client_max_body_size 100M;
-
 	# define an easy to reference name that can be used in fastgi_pass
 	upstream heroku-fcgi {
 		#server 127.0.0.1:4999 max_fails=3 fail_timeout=3s;
@@ -30,6 +28,9 @@ http {
 	}
 
 	server {
+
+		client_max_body_size 100M;
+
 		# define an easy to reference name that can be used in try_files
 		location @heroku-fcgi {
 			include fastcgi_params;
